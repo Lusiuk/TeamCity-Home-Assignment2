@@ -1,6 +1,4 @@
-fn main() {
-    println!("Hello from Rust!");
-    
+fn main() {    
     let a: u32 = 3;
     let b: u32 = 4;
     let c: u32 = 5;

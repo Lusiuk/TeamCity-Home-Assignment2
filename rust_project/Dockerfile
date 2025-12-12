@@ -1,14 +1,10 @@
-FROM rust:1.70-alpine as builder
-RUN apk add --no-cache musl-dev
-WORKDIR /app
-COPY Cargo.toml Cargo.lock ./
-RUN cargo fetch
-
+FROM rust:1.92 AS builder
+WORKDIR /usr/src/app
 COPY . .
-
 RUN cargo build --release
 
-
-FROM alpine:3.18
-COPY --from=builder /app/target/release/rust_project /usr/local/bin/
-CMD ["rust_project"]
+FROM debian:bullseye-slim
+WORKDIR /app
+RUN apt-get update && apt-get install -y libssl-dev && rm -rf /var/lib/apt/lists/*
+COPY --from=builder /usr/src/app/target/release/rust_project .
+CMD ["./rust_project"]
