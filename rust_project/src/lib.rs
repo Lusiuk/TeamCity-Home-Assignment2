@@ -15,6 +15,7 @@ mod tests {
         let a = 3u32;
         let b = 4u32;
         let c = 5u32;
+        let d = 6u32;
         assert_eq!(a.pow(2) + b.pow(2), c.pow(2));
     }
 }
